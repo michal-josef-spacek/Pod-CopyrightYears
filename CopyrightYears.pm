@@ -68,8 +68,13 @@ sub pod {
 
 	my $pod = $self->{'pod_abstract'}->pod;
 	chomp $pod;
-	my $ret = substr $pod, 0, -2;
-	$ret .= "\n";
+	my $ret = $pod;
+	if ($pod =~ m/=cut\s+$/ms) {
+		$ret = substr $pod, 0, -2;
+		$ret .= "\n";
+	} else {
+		$ret .= "\n";
+	}
 
 	return $ret;
 }

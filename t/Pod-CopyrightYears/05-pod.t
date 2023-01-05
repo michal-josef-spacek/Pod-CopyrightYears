@@ -3,7 +3,7 @@ use warnings;
 
 use File::Object;
 use Pod::CopyrightYears;
-use Test::More 'tests' => 7;
+use Test::More 'tests' => 9;
 use Test::NoWarnings;
 
 # Data dir.
@@ -143,3 +143,30 @@ BSD 2-Clause License
 =cut
 END
 is($pod, $expected_pod, 'Changed pod (Ex3 - added last year).');
+
+# Test.
+$obj = Pod::CopyrightYears->new(
+	'pod_file' => $data_dir->file('Ex4.pm')->s,
+);
+$pod = $obj->pod;
+$expected_pod = <<'END';
+package Ex4;
+
+1;
+
+__END__
+END
+is($pod, $expected_pod, 'Original pod (Ex4).');
+$obj = Pod::CopyrightYears->new(
+	'pod_file' => $data_dir->file('Ex4.pm')->s,
+);
+$obj->change_years(2023);
+$pod = $obj->pod;
+$expected_pod = <<'END';
+package Ex4;
+
+1;
+
+__END__
+END
+is($pod, $expected_pod, 'No POD (Ex4).');

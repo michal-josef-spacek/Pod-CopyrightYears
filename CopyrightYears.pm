@@ -7,7 +7,7 @@ use Class::Utils qw(set_params);
 use Error::Pure qw(err);
 use Pod::Abstract;
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 # Constructor.
 sub new {
@@ -277,6 +277,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.01
+0.02
 
 =cut

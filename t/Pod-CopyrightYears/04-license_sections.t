@@ -10,23 +10,28 @@ use Test::NoWarnings;
 my $data_dir = File::Object->new->up->dir('data')->set;
 
 # Test.
-my $obj = Pod::CopyrightYears->new;
-my @sections = $obj->license_sections($data_dir->file('Ex1.pm')->s);
+my $obj = Pod::CopyrightYears->new(
+	'pod_file' => $data_dir->file('Ex1.pm')->s,
+);
+my @sections = $obj->license_sections;
 is(scalar @sections, 1, 'Found one section (Ex1).');
 $data_dir->reset;
 
 # Test.
-$obj = Pod::CopyrightYears->new;
-@sections = $obj->license_sections($data_dir->file('Ex2.pm')->s);
+$obj = Pod::CopyrightYears->new(
+	'pod_file' => $data_dir->file('Ex2.pm')->s,
+);
+@sections = $obj->license_sections;
 is(scalar @sections, 0, 'Found zero sections (Ex2).');
 $data_dir->reset;
 
 # Test.
 $obj = Pod::CopyrightYears->new(
+	'pod_file' => $data_dir->file('Ex3.pm')->s,
 	'section_names' => [
 		'LICENSE',
 	],
 );
-@sections = $obj->license_sections($data_dir->file('Ex3.pm')->s);
+@sections = $obj->license_sections;
 is(scalar @sections, 1, 'Found one section (Ex3).');
 $data_dir->reset;

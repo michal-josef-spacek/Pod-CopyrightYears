@@ -122,3 +122,161 @@ sub _change_years {
 }
 
 1;
+
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+Pod::CopyrightYears - Object for copyright years changing in POD.
+
+=head1 SYNOPSIS
+
+ use Pod::CopyrightYears;
+
+ my $obj = Pod::CopyrightYears->new(%params);
+ $obj->change_years($last_year);
+ my @pod_nodes = $obj->license_sections;
+ my $pod = $obj->pod;
+
+=head1 METHODS
+
+=head2 C<new>
+
+ my $obj = Pod::CopyrightYears->new(%params);
+
+Constructor.
+
+=over 8
+
+=item * C<pod_file>
+
+POD or Perl module file to process.
+
+It's required parameter.
+
+=item * C<section_names>
+
+List of POD C<=head1> section names
+
+=back
+
+Returns instance of object.
+
+=head2 C<change_years>
+
+ $obj->change_years($last_year);
+
+Change year in text sections. Matches C<\d{4}> or C<\d{4}-\d{4}> strings.
+
+Returns undef.
+
+=head2 C<license_sections>
+
+ my @pod_nodes = $obj->license_sections;
+
+Get Pod::Abstract::Node nodes which match C<section_names> parameter.
+
+Returns list of nodes.
+
+=head2 C<pod>
+
+ my $pod = $obj->pod;
+
+Serialize object to Perl module or POD output.
+
+Returns string.
+
+=head1 ERRORS
+
+ new():
+         From Class::Utils::set_params():
+                 Unknown parameter '%s'.
+         Parameter 'pod_file' is required.
+
+=head1 EXAMPLE
+
+=for comment filename=update_copyright_years.pl
+
+ use strict;
+ use warnings;
+
+ use File::Temp;
+ use IO::Barf qw(barf);
+ use Pod::CopyrightYears;
+
+ my $content = <<'END';
+ package Example;
+ 1;
+ __END__
+ =pod
+
+ =head1 LICENSE AND COPYRIGHT
+
+ © 1977 Michal Josef Špaček
+
+ =cut
+ END
+
+ # Temporary file.
+ my $temp_file = File::Temp->new->filename;
+
+ # Barf out.
+ barf($temp_file, $content);
+
+ # Object.
+ my $obj = Pod::CopyrightYears->new(
+         'pod_file' => $temp_file,
+ );
+
+ # Change years.
+ $obj->change_years(1987);
+
+ # Print out.
+ print $obj->pod;
+
+ # Unlink temporary file.
+ unlink $temp_file;
+
+ # Output:
+ # package Example;
+ # 1;
+ # __END__
+ # =pod
+ # 
+ # =head1 LICENSE AND COPYRIGHT
+ # 
+ # © 1977-1987 Michal Josef Špaček
+ # 
+ # =cut
+
+=head1 DEPENDENCIES
+
+L<Class::Utils>,
+L<Error::Pure>,
+L<Pod::Abstract>.
+
+=head1 REPOSITORY
+
+L<https://github.com/michal-josef-spacek/Pod-CopyrightYears>
+
+=head1 AUTHOR
+
+Michal Josef Špaček L<mailto:skim@cpan.org>
+
+L<http://skim.cz>
+
+=head1 LICENSE AND COPYRIGHT
+
+© 2023 Michal Josef Špaček
+
+BSD 2-Clause License
+
+=head1 VERSION
+
+0.01
+
+=cut

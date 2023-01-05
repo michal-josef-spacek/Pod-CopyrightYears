@@ -21,6 +21,7 @@ meta-spec:
 name: Pod-CopyrightYears
 no_index:
   directory:
+    - examples
     - inc
     - t
     - xt

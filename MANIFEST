@@ -1,5 +1,6 @@
 CONCEPT
 CopyrightYears.pm
+examples/update_copyright_years.pl
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm

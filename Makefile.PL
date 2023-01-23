@@ -20,6 +20,7 @@ recursive_author_tests('xt');
 requires 'Class::Utils' => 0;
 requires 'Error::Pure' => 0.30;
 requires 'Pod::Abstract' => 0;
+requires 'String::UpdateYears' => 0;
 requires 'perl' => '5.6.2';
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Pod-CopyrightYears/issues';
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Pod-CopyrightYears';

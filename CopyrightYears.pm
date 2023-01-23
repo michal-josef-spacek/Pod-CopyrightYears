@@ -240,6 +240,20 @@ Returns string.
  # 
  # =cut
 
+=head1 SEE ALSO
+
+=over
+
+=item L<perl-module-copyright-years>
+
+Tool for update copyright years in Perl distribution.
+
+=item L<App::Perl::Module::CopyrightYears>
+
+Base class for perl-module-copyright-years tool.
+
+=back
+
 =head1 DEPENDENCIES
 
 L<Class::Utils>,

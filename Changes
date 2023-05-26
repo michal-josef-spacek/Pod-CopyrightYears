@@ -1,4 +1,5 @@
 0.03
+ - Fix parsing and test for it.
 
 0.02 2023-01-23T18:37:50+01:00
  - Add SEE ALSO section to doc.

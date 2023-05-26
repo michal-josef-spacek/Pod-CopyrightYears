@@ -70,7 +70,8 @@ sub pod {
 	my $pod = $self->{'pod_abstract'}->pod;
 	chomp $pod;
 	my $ret = $pod;
-	if ($pod =~ m/=cut\s+$/ms) {
+	# XXX Fix Abstract
+	if ($pod =~ m/=cut\s+$/s) {
 		$ret = substr $pod, 0, -2;
 		$ret .= "\n";
 	} else {

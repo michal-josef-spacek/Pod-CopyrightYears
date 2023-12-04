@@ -1,4 +1,4 @@
-0.03
+0.03 2023-12-04T12:29:09+01:00
  - Add 'debug' parameter with print of text before change.
  - Add support for changing year of in pod item, which is verbatim.
  - Fix parsing and test for it.

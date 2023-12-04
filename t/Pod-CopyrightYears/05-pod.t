@@ -3,7 +3,7 @@ use warnings;
 
 use File::Object;
 use Pod::CopyrightYears;
-use Test::More 'tests' => 10;
+use Test::More 'tests' => 12;
 use Test::NoWarnings;
 
 # Data dir.
@@ -190,3 +190,54 @@ __DATA__
 4:hmt:Husitské muzeum v Táboře:http\://kramerius.husitskemuzeum.cz/
 END
 is($pod, $expected_pod, 'Original pod (Ex5).');
+
+# Test.
+$obj = Pod::CopyrightYears->new(
+	'pod_file' => $data_dir->file('Ex6.pm')->s,
+	'section_names' => [
+		'LICENSE',
+	],
+);
+$pod = $obj->pod;
+$expected_pod = <<'END';
+package Ex6;
+
+1;
+
+__END__
+
+=pod
+
+=head1 LICENSE
+
+ © 2013 Michal Josef Špaček
+ BSD 2-Clause License
+
+=cut
+END
+is($pod, $expected_pod, 'Original pod (Ex6).');
+$obj = Pod::CopyrightYears->new(
+	'pod_file' => $data_dir->file('Ex6.pm')->s,
+	'section_names' => [
+		'LICENSE',
+	],
+);
+$obj->change_years(2023);
+$pod = $obj->pod;
+$expected_pod = <<'END';
+package Ex6;
+
+1;
+
+__END__
+
+=pod
+
+=head1 LICENSE
+
+ © 2013-2023 Michal Josef Špaček
+ BSD 2-Clause License
+
+=cut
+END
+is($pod, $expected_pod, 'Changed pod (Ex6 - added last year).');

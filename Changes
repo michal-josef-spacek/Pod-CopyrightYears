@@ -1,5 +1,6 @@
 0.03
  - Add 'debug' parameter with print of text before change.
+ - Add support for changing year of in pod item, which is verbatim.
  - Fix parsing and test for it.
  - Update Module::Install to 1.21 version.
 

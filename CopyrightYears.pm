@@ -89,7 +89,7 @@ sub _iterate_node {
 
 	if (defined $pod_node->children) {
 		foreach my $child ($pod_node->children) {
-			if ($child->type eq ':text') {
+			if ($child->type eq ':text' || $child->type eq ':verbatim') {
 				$self->_change_years($child, $year);
 			} else {
 				$self->_iterate_node($child, $year);

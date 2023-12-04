@@ -17,6 +17,9 @@ sub new {
 	# Create object.
 	my $self = bless {}, $class;
 
+	# Debug mode.
+	$self->{'debug'} = 0;
+
 	# Pod file to update.
 	$self->{'pod_file'} = undef;
 
@@ -101,6 +104,10 @@ sub _change_years {
 	my ($self, $pod_node, $year) = @_;
 
 	my $text = $pod_node->pod;
+	if ($self->{'debug'}) {
+		print "Found text to change:\n";
+		print $text."\n";
+	}
 	my $updated = update_years($text, {}, $year);
 	if ($updated) {
 		$pod_node->body($updated);
@@ -139,6 +146,12 @@ Pod::CopyrightYears - Object for copyright years changing in POD.
 Constructor.
 
 =over 8
+
+=item * C<debug>
+
+Debug mode.
+
+Default value is 0.
 
 =item * C<pod_file>
 

@@ -1,4 +1,5 @@
 0.03
+ - Add 'debug' parameter with print of text before change.
  - Fix parsing and test for it.
  - Update Module::Install to 1.21 version.
 
